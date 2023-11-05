@@ -19,7 +19,7 @@
 <body>
     <div id="content">
         <h1>Casa Inteligente</h1>
-        <button id="ledButton">LED</button>
+        <button id="ledButton">Acender LED</button>
         <h2>Dados do Sensor</h2>
         <p id="sensorData">Carregando...</p>
     </div>
@@ -27,7 +27,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
     <script>
         var firebaseConfig = {
-    apiKey: "AIzaSyCs0okqcJPfis-AzEi7kBggYv9hx1BqoJk",
+             apiKey: "AIzaSyCs0okqcJPfis-AzEi7kBggYv9hx1BqoJk",
     authDomain: "casainteligente-daa3e.firebaseapp.com",
     databaseURL: "https://casainteligente-daa3e-default-rtdb.firebaseio.com",
     projectId: "casainteligente-daa3e",
@@ -46,13 +46,6 @@
         database.ref('/sensorData').on('value', function(snapshot) {
             document.getElementById('sensorData').innerText = snapshot.val();
         });
-        ledButton.addEventListener('click', function() {
-    ledStatus = !ledStatus;
-    var ledButtonText = ledStatus ? 'Apagar LED' : 'Acender LED';
-    ledButton.textContent = ledButtonText;
-    database.ref('/ledStatus').set(ledStatus);
-
-
     </script>
 </body>
 </html>
