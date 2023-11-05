@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Casa Inteligente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        #content {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <h1>Casa Inteligente</h1>
+        <button id="ledButton">Acender LED</button>
+        <h2>Dados do Sensor</h2>
+        <p id="sensorData">Carregando...</p>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyCs0okqcJPfis-AzEi7kBggYv9hx1BqoJk",
+            authDomain: "casainteligente-daa3e.firebaseapp.com",
+            databaseURL: "https://casainteligente-daa3e-default-rtdb.firebaseio.com",
+            projectId: "casainteligente-daa3e",
+            storageBucket: "casainteligente-daa3e.appspot.com",
+            messagingSenderId: "230575743661",
+            appId: "1:230575743661:web:319108934e66e465555c24",
+            measurementId: "G-SRTRW4RYPY"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var database = firebase.database();
+        var ledStatus = false;
+        document.getElementById('ledButton').addEventListener('click', function () {
+            ledStatus = !ledStatus;
+            database.ref('/ledStatus').set(ledStatus);
+        });
+        database.ref('/sensorData').on('value', function (snapshot) {
+            document.getElementById('sensorData').innerText = snapshot.val();
+        });
+    </script>
+</body>
+
+</html>
