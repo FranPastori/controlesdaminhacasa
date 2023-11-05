@@ -48,20 +48,9 @@
         });
         ledButton.addEventListener('click', function() {
     ledStatus = !ledStatus;
-   
-    ledButton.addEventListener('click', function() {
-    ledStatus = !ledStatus;
     var ledButtonText = ledStatus ? 'Apagar LED' : 'Acender LED';
     ledButton.textContent = ledButtonText;
     database.ref('/ledStatus').set(ledStatus);
-
-    // Atualize a cor do botão
-    if (ledStatus) {
-        ledButton.style.backgroundColor = "#4CAF50"; // Verde
-    } else {
-        ledButton.style.backgroundColor = "#FF0000"; // Vermelho
-    }
-});
 
 
     </script>
