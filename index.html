@@ -14,28 +14,6 @@
             width: 50%;
             padding: 10px;
         }
-        #ledButton {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        #ledButton:hover {
-            background-color: #45a049;
-        }
-        #sensorPanel {
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
     </style>
 </head>
 <body>
@@ -43,45 +21,30 @@
         <h1>Casa Inteligente</h1>
         <button id="ledButton">Acender LED</button>
         <h2>Dados do Sensor</h2>
-        <div id="sensorPanel">
-            <p id="sensorData">Carregando...</p>
-        </div>
+        <p id="sensorData">Carregando...</p>
     </div>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
     <script>
         var firebaseConfig = {
-            apiKey: "SUA_API_KEY",
-            authDomain: "SEU_DOMÍNIO.firebaseapp.com",
-            databaseURL: "https://SEU_DOMÍNIO.firebaseio.com",
-            projectId: "SEU_PROJECT_ID",
-            storageBucket: "SEU_BUCKET.appspot.com",
-            messagingSenderId: "SEU_SENDER_ID",
-            appId: "SEU_APP_ID",
-            measurementId: "SEU_MEASUREMENT_ID"
+    apiKey: "AIzaSyCs0okqcJPfis-AzEi7kBggYv9hx1BqoJk",
+    authDomain: "casainteligente-daa3e.firebaseapp.com",
+    databaseURL: "https://casainteligente-daa3e-default-rtdb.firebaseio.com",
+    projectId: "casainteligente-daa3e",
+    storageBucket: "casainteligente-daa3e.appspot.com",
+    messagingSenderId: "230575743661",
+    appId: "1:230575743661:web:319108934e66e465555c24",
+    measurementId: "G-SRTRW4RYPY"
         };
         firebase.initializeApp(firebaseConfig);
         var database = firebase.database();
         var ledStatus = false;
-        var ledButton = document.getElementById('ledButton');
-        var sensorData = document.getElementById('sensorData');
-        var sensorPanel = document.getElementById('sensorPanel');
-
-        ledButton.addEventListener('click', function() {
+        document.getElementById('ledButton').addEventListener('click', function() {
             ledStatus = !ledStatus;
-            var ledButtonText = ledStatus ? 'Apagar LED' : 'Acender LED';
-            ledButton.textContent = ledButtonText;
             database.ref('/ledStatus').set(ledStatus);
         });
-
-        database.ref('/ledStatus').on('value', function(snapshot) {
-            ledStatus = snapshot.val();
-            var ledButtonText = ledStatus ? 'Apagar LED' : 'Acender LED';
-            ledButton.textContent = ledButtonText;
-        });
-
         database.ref('/sensorData').on('value', function(snapshot) {
-            sensorData.innerText = snapshot.val();
+            document.getElementById('sensorData').innerText = snapshot.val();
         });
     </script>
 </body>
